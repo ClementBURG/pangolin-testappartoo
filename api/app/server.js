@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
 import authenticationRoutes from './routes/authentication';
+import userRoutes from './routes/user';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true });
 
 app.use('/auth/', authenticationRoutes);
+app.use('/user/', userRoutes);
 
 app.listen(process.env.SERVER_PORT, function(){
   console.log('Server is running on Port', process.env.SERVER_PORT);

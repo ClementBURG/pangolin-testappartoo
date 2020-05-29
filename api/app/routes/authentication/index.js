@@ -4,12 +4,12 @@ import bcrypt from 'bcrypt';
 import Error from '../../assets/error';
 import UserModel from '../../models/user';
 import AuthenticationAssets from '../../assets/authentication';
-import authenticationMiddlewares from '../../middlewares/authentication';
+import AuthenticationMiddlewares from '../../middlewares/authentication';
 
 const router = express.Router();
 
 router.post('/register',
-  authenticationMiddlewares.isNotAuthenticated,
+  AuthenticationMiddlewares.isNotAuthenticated,
   async (req, res) => {
     try {
       if (!req.body.username || !req.body.password) {
@@ -28,18 +28,17 @@ router.post('/register',
 
       try {
         await newUser.save();
+        res.status(200).send(AuthenticationAssets.genAuth(newUser));
       } catch (e) {
         throw Error.getByCode('DATABASE_ERROR');
       }
-
-      res.status(200).send(AuthenticationAssets.genAuth(newUser));
     } catch (e) {
       res.status(e.status).send(e.data);
     }
   });
 
 router.post('/login',
-  authenticationMiddlewares.isNotAuthenticated,
+  AuthenticationMiddlewares.isNotAuthenticated,
   async (req, res) => {
     try {
       let user;

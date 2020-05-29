@@ -13,7 +13,7 @@ class Authentication {
 
     return {
       user: user,
-      token: JWTToken,
+      jwt: JWTToken,
       expiresIn: process.env.JWT_EXPIRATION,
     };
   }

@@ -1,1 +1,17 @@
-<p>home works!</p>
+<div class="col-md-10 offset-md-1 mt-5">
+  <div class="row">
+    <div class="col-sm-6">
+      <div *ngIf="user" class="card mt-4">
+        <div class="card-body">
+          <h4 class="card-title">My informations</h4>
+          <p class="card-text">Age: {{user.age}}</p>
+          <p class="card-text">Family: {{user.family}}</p>
+          <p class="card-text">Race: {{user.race}}</p>
+          <p class="card-text">Food: {{user.food}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import Error from '../assets/error';
 
 function checkToken(req) {
-  let token = req.headers['x-access-token'] || req.headers['authorization'];
+  let token = req.headers['x-access-token'] || req.headers['authorization'] || req.headers['Authorization'];
 
   if (token) {
     if (token.startsWith('Bearer ')) {

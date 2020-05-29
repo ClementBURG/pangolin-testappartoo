@@ -1,1 +1,46 @@
-<router-outlet></router-outlet>
+<div class="main-container">
+
+  <header>
+    <nav *ngIf="currentUser" class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand" routerLink="/">
+        <img id="nav-logo" src="../assets/icon-pangolin.jpg" alt="pangolin logo">
+      </a>
+      <div class="navbar-nav ml-auto">
+        <div class="d-inline-block" ngbDropdown #navDrop="ngbDropdown">
+          <button class="btn btn-primary" id="dropdownManual" ngbDropdownAnchor (focus)="navDrop.open()">
+            {{currentUser.username}}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem routerLink="/settings">
+              <fa-icon [icon]="faCogs"></fa-icon>
+              Settings
+            </button>
+            <button ngbDropdownItem (click)="logout()">
+              <fa-icon [icon]="faSignOutAlt"></fa-icon>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <footer>
+    <div class="bg-dark text-center text-light p-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <span>© All right Reversed. Pangolin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>

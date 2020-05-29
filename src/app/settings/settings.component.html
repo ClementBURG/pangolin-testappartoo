@@ -1,0 +1,43 @@
+<div class="col-md-8 offset-md-2 mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>My settings</h2>
+      <div *ngIf="successMessage" class="alert alert-success mt-3 mb-0">{{successMessage}}</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+
+      <div class="card mt-4" *ngIf="user">
+        <div class="card-body">
+          <div *ngIf="infoError" class="alert alert-danger mt-3 mb-0">{{infoError}}</div>
+          <form [formGroup]="infoForm" (ngSubmit)="onInfoSubmit()">
+            <div class="form-group">
+
+              <label>Age</label>
+              <input formControlName="age" class="form-control"/>
+
+              <label>Family</label>
+              <input formControlName="family" class="form-control"/>
+
+              <label>Race</label>
+              <input formControlName="race" class="form-control"/>
+
+              <label>Food</label>
+              <textarea formControlName="food" class="form-control"></textarea>
+            </div>
+
+            <div class="text-center">
+              <button [disabled]="infoLoading" class="btn btn-primary">
+                <span *ngIf="infoLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                Save
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
