@@ -12,6 +12,20 @@
       </div>
     </div>
     <div class="col-sm-6">
+      <div *ngIf="friends" class="card mt-4">
+        <div class="card-body">
+          <h4 class="card-title">My friends</h4>
+          <div *ngFor="let friend of friends" class="row">
+            <div class="col">
+              <p class="card-text">{{friend._friend.username}}</p>
+            </div>
+            <div class="col">
+              <button (click)="removeFriend(friend._id)" class="btn btn-outline-danger my-2 my-sm-0">Remove friend</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

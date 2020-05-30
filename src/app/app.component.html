@@ -5,6 +5,12 @@
       <a class="navbar-brand" routerLink="/">
         <img id="nav-logo" src="../assets/icon-pangolin.jpg" alt="pangolin logo">
       </a>
+
+      <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="searchSubmit()">
+        <input class="form-control mr-sm-2" type="search" formControlName="username" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
       <div class="navbar-nav ml-auto">
         <div class="d-inline-block" ngbDropdown #navDrop="ngbDropdown">
           <button class="btn btn-primary" id="dropdownManual" ngbDropdownAnchor (focus)="navDrop.open()">

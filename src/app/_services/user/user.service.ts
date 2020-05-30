@@ -12,20 +12,20 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  search(username: string, page = 1, per_page = 5) {
+  search(username: string, page = 1, limit = 5) {
     const params = new HttpParams()
       .set('page', String(page))
-      .set('per_page', String(per_page))
+      .set('limit', String(limit))
       .set('username', username);
 
     return this.http.get<PaginatedModel<User>>(`${environment.apiUrl}/user/search`, {params});
   }
 
-  getById(user_id: number) {
+  getById(user_id: string) {
     return this.http.get<User>(`${environment.apiUrl}/user/` + user_id);
   }
 
-  updateById(user_id: number, age?: number, family?: string, race?: string, food?: string) {
+  updateById(user_id: string, age?: number, family?: string, race?: string, food?: string) {
     let body = {};
 
     if (age)

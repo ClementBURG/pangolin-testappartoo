@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 
 import authenticationRoutes from './routes/authentication';
 import userRoutes from './routes/user';
+import friendRoutes from './routes/friend';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true });
 
 app.use('/auth/', authenticationRoutes);
 app.use('/user/', userRoutes);
+app.use('/friend/', friendRoutes);
 
 app.listen(process.env.SERVER_PORT, function(){
   console.log('Server is running on Port', process.env.SERVER_PORT);

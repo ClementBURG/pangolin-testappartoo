@@ -1,0 +1,56 @@
+<div class="col-md-8 offset-md-2 mt-5">
+
+  <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+  <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+
+  <ng-template #no_users>
+    <div class="text-center">
+      No users
+    </div>
+  </ng-template>
+
+  <div *ngIf="users && users.length; else no_users">
+    <div *ngFor="let user of users" class="card mt-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <p class="card-title">{{user.username}}</p>
+            <p *ngIf="user.age" class="card-subtitle">{{user.age}}</p>
+            <p *ngIf="user.family" class="card-subtitle">{{user.family}}</p>
+            <p *ngIf="user.race" class="card-subtitle">{{user.race}}</p>
+            <p *ngIf="user.food" class="card-subtitle">{{user.food}}</p>
+          </div>
+          <div class="col">
+            <div *ngIf="user._id != currentUser._id">
+              <button *ngIf="!user.friend" (click)="addFriend(user)" class="btn btn-outline-primary my-2 my-sm-0">Add friend</button>
+              <button *ngIf="user.friend" (click)="removeFriend(user)" class="btn btn-outline-danger my-2 my-sm-0">Remove friend</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pt-3 pb-1">
+    <ul *ngIf="displayedPages && displayedPages.length" class="pagination justify-content-center">
+      <li [ngClass]="{disabled:currentPage === 1}" class="page-item first-item">
+        <a [routerLink]="['./']" [queryParams]="{ q: query, page: 1 }" class="page-link">First</a>
+      </li>
+      <li [ngClass]="{disabled:currentPage === 1}" class="page-item previous-item">
+        <a [routerLink]="['./']" [queryParams]="{ q: query, page: currentPage - 1 }" class="page-link">Previous</a>
+      </li>
+      <li *ngFor="let page of displayedPages" [ngClass]="{active:currentPage === page}" class="page-item number-item">
+        <a [routerLink]="['./']" [queryParams]="{ q: query, page: page }" class="page-link">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:currentPage === totalPages}" class="page-item next-item">
+        <a [routerLink]="['./']" [queryParams]="{ q: query, page: currentPage + 1 }" class="page-link">Next</a>
+      </li>
+      <li [ngClass]="{disabled:currentPage === totalPages}" class="page-item last-item">
+        <a [routerLink]="['./']" [queryParams]="{ q: query, page: totalPages }" class="page-link">Last</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import express from 'express';
 
 import Error from '../../assets/error';
 import UserModel from '../../models/user';
+import FriendModel from '../../models/friend';
 import AuthenticationMiddlewares from '../../middlewares/authentication';
 import UserMiddlewares from '../../middlewares/user';
 
@@ -25,6 +26,12 @@ router.get('/search',
 
       try {
         let list = await UserModel.paginate(query, options);
+
+        for (let user of list.docs) {
+          let friend = await FriendModel.findOne({user_id: req.payload._id, _friend: user._id});
+          user.set('friend', friend, {strict: false});
+        }
+
         res.status(200).send(list);
       } catch (e) {
         throw Error.getByCode('DATABASE_ERROR');
@@ -53,6 +60,9 @@ router.get('/:user_id',
       if (!user) {
         throw Error.getByCode('NOT_FOUND');
       }
+
+      let friend = await FriendModel.findOne({user_id: req.payload._id, _friend: user._id});
+      user.set('friend', friend, {strict: false});
 
       res.status(200).send(user);
     } catch (e) {
