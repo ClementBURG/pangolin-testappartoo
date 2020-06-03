@@ -1,6 +1,7 @@
 <div class="col-md-8 offset-md-2 mt-5">
 
   <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+  <div *ngIf="successMessage" class="alert alert-success mt-3 mb-0">{{successMessage}}</div>
 
   <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
 
@@ -9,6 +10,8 @@
       No users
     </div>
   </ng-template>
+
+  <button (click)="inviteFriend()" class="btn btn-outline-primary my-2 my-sm-0">Invite friend</button>
 
   <div *ngIf="users && users.length; else no_users">
     <div *ngFor="let user of users" class="card mt-4">

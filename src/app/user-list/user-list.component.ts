@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit {
   submitted = false;
   users: User[];
   error = '';
+  successMessage = '';
 
   query: string;
   currentPage: number;
@@ -70,6 +71,18 @@ export class UserListComponent implements OnInit {
   removeFriend(user: User) {
     this.friendService.removeById(user.friend._id).pipe(first()).subscribe(r => {
       user.friend = null;
+    });
+  }
+
+  inviteFriend() {
+    this.authenticationService.register(this.query, 'sample-password').pipe(first()).subscribe(r => {
+      this.successMessage = 'Your friend has been invited';
+      this.friendService.addById(r.user._id).pipe(first()).subscribe(r => {
+
+      });
+    }, error => {
+      console.log(error);
+      this.error = error.message;
     });
   }
 }

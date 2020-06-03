@@ -9,7 +9,6 @@ import AuthenticationMiddlewares from '../../middlewares/authentication';
 const router = express.Router();
 
 router.post('/register',
-  AuthenticationMiddlewares.isNotAuthenticated,
   async (req, res) => {
     try {
       if (!req.body.username || !req.body.password) {
